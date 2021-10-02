@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TimeEat</string>
+    <string name="Refresh">Refresh</string>
+    <string name="TimeEat">TimeEat</string>
+    <string name="Record">Record</string>
+    <string name="Back">Back</string>
+</resources>
