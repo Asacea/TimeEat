@@ -4,4 +4,7 @@
     <string name="TimeEat">TimeEat</string>
     <string name="Record">Record</string>
     <string name="Back">Back</string>
+    <string name="real">real</string>
+    <string name="stop">stop</string>
+    <string name="delete">delete</string>
 </resources>
