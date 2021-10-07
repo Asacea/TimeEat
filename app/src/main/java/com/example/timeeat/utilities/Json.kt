@@ -8,7 +8,7 @@ import java.io.*
 
 fun writeProduct(writer: JsonWriter, product: Product){
     writer.beginObject()
-    writer.name("name").value(product.name)
+    writer.name("time").value(product.time)
     writer.endObject()
 }
 fun writeProductArray(writer: JsonWriter, products:List<Product>){
@@ -50,7 +50,7 @@ fun readProductArray(reader: JsonReader):List<Product>
 
 //从json数组中读取product对象
 fun readProuct(reader: JsonReader):Product{
-    var name =""
+    var time =""
     reader.beginObject()
     while(reader.hasNext()) {
         val field = reader.nextName()
@@ -58,13 +58,13 @@ fun readProuct(reader: JsonReader):Product{
        /* if (field.equals("id")) {
             id = reader.nextString()
         }
-        else*/ if (field.equals("name")){
-            name=reader.nextString()
+        else*/ if (field.equals("time")){
+            time=reader.nextString()
         }
         else{
             reader.skipValue()
         }
     }
     reader.endObject()
-    return Product(name)
+    return Product(time)
 }

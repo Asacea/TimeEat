@@ -16,7 +16,7 @@ class MyAdapter(val time:List<Product>): RecyclerView.Adapter<MyViewHolder>(){
         val timelist=time[position]
         //holder.time.text=timelist.products//绑定模型与视图
         holder.itemView.apply {
-            text_view_time.text=timelist.name
+            text_view_time.text=timelist.time
         }
     }
 
