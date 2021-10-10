@@ -6,7 +6,7 @@ import com.example.timeeat.data.Product
 import java.io.*
 
 //读
-fun readJsonStream(inputStream: InputStream):List<Product>{
+fun readJsonStream(inputStream: InputStream):ArrayList<Product>{
     val reader= JsonReader(InputStreamReader(inputStream,"UTF-8"))
     try {
         return readProductArray(reader)
@@ -15,7 +15,7 @@ fun readJsonStream(inputStream: InputStream):List<Product>{
     }
 }
 //读取json数组中的每一元素，就是Product对象
-fun readProductArray(reader: JsonReader):List<Product>
+fun readProductArray(reader: JsonReader):ArrayList<Product>
 {
     val products=ArrayList<Product>()
     reader.beginArray()
