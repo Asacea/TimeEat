@@ -5,28 +5,6 @@ import android.util.JsonWriter
 import com.example.timeeat.data.Product
 import java.io.*
 
-
-/*fun writeProduct(writer: JsonWriter, product: Product){
-    writer.beginObject()
-    writer.name("time").value(product.time)
-    writer.endObject()
-}
-fun writeProductArray(writer: JsonWriter, products:List<Product>){
-    writer.beginArray()
-    for(product in products)
-    {
-        writeProduct(writer, product)
-    }
-    writer.endArray()
-}
-//写
-fun writeJsonStream(out: OutputStream, products:List<Product>){
-    val writer= JsonWriter(OutputStreamWriter(out,"utf-8"))//这东西是啥？
-    writer.setIndent("    ")//设置缩进格式
-    writeProductArray(writer,products)
-    writer.close()
-}
- */
 //读
 fun readJsonStream(inputStream: InputStream):List<Product>{
     val reader= JsonReader(InputStreamReader(inputStream,"UTF-8"))
@@ -55,11 +33,7 @@ fun readProuct(reader: JsonReader):Product{
     reader.beginObject()
     while(reader.hasNext()) {
         val field = reader.nextName()
-
-       /* if (field.equals("id")) {
-            id = reader.nextString()
-        }
-        else*/ if (field.equals("time")){
+        if (field.equals("time")){
             time=reader.nextString()
         }
         else{
