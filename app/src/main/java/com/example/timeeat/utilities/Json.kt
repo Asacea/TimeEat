@@ -6,7 +6,7 @@ import com.example.timeeat.data.Product
 import java.io.*
 
 
-fun writeProduct(writer: JsonWriter, product: Product){
+/*fun writeProduct(writer: JsonWriter, product: Product){
     writer.beginObject()
     writer.name("time").value(product.time)
     writer.endObject()
@@ -26,6 +26,7 @@ fun writeJsonStream(out: OutputStream, products:List<Product>){
     writeProductArray(writer,products)
     writer.close()
 }
+ */
 //读
 fun readJsonStream(inputStream: InputStream):List<Product>{
     val reader= JsonReader(InputStreamReader(inputStream,"UTF-8"))
