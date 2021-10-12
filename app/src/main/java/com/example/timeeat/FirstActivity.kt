@@ -109,7 +109,7 @@ class FirstActivity : AppCompatActivity() {
 
         button_2.setOnClickListener {
             val jsonFilePath=getExternalFilesDir(null)?.absolutePath+"time_data.json"
-            val file=File(jsonFilePath)
+            //val file=File(jsonFilePath)
             val fis=FileInputStream(jsonFilePath)
             if(fis.available()!=0) {
                 saveJson()
