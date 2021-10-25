@@ -56,8 +56,8 @@ class RecordActivity : AppCompatActivity() {
 
              val fis=FileInputStream(jsonFile)
         //注意这里有较大改动
-            val timelist = Gson().fromJson(getJsonString(), arrayListOf<Product>().javaClass)
-           // val timelist = readJsonStream(fis)
+            //val timelist = Gson().fromJson(getJsonString(), arrayListOf<Product>().javaClass)//直接得到arraylist<product>,不用多读啦
+            val timelist = readJsonStream(fis)
             timeRecyclerView.adapter = MyAdapter(timelist)
 
 
