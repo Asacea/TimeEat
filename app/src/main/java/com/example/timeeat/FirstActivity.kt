@@ -37,7 +37,7 @@ class FirstActivity : AppCompatActivity() {
                 hour-=24}
             val str="$hour:$minute:$second"
             return str
-        }//很笨的方法得到时间
+        }//很笨的方法得到时间，，，，太他妈笨了吧
 
 
         fun getJsonString():String?{
@@ -45,13 +45,12 @@ class FirstActivity : AppCompatActivity() {
             var json:String?=null
             val charset:Charset=Charsets.UTF_8
             try{
-                val jsonFile=FileInputStream(jsonFilePath)
-                //val jsonFile=assets.open("time_data.json")
-                val size=jsonFile.available()
-                val buffer=ByteArray(size)
-                jsonFile.read(buffer)
-                jsonFile.close()
-                json=String(buffer,charset)
+                val jsonFile=FileInputStream(jsonFilePath)//打开文件
+                val size=jsonFile.available()//读出可读字节的大小
+                val buffer=ByteArray(size)//字节数组
+                jsonFile.read(buffer)//调用InputStream的read方法，从输入流中读取一定数量的字节，并将其储存在缓存区数组buffer中
+                jsonFile.close()//用完流要记得关闭
+                json=String(buffer,charset)//String函数，将字节数组buffer以指定的编码格式charset进行解码，最终得到的是json字符串
             }catch(e:IOException){
                 e.printStackTrace()
                 return null
@@ -59,12 +58,12 @@ class FirstActivity : AppCompatActivity() {
             return json
         }//得到json格式的字符串
 
-        fun write(filePath:String,jsonString:String){
+        fun write(filePath:String,jsonString:String){//把json 格式的字符串写进json文件
             val file=File(filePath)
             try{
-                val outputStreamWriter=OutputStreamWriter(FileOutputStream(file))
-                outputStreamWriter.write(jsonString)
-                outputStreamWriter.close()
+                val outputStreamWriter=OutputStreamWriter(FileOutputStream(file))//打开该文件
+                outputStreamWriter.write(jsonString)//调用write方法
+                outputStreamWriter.close()//关闭输出流
             }catch(e:Exception){
               e.printStackTrace()
             }
@@ -72,6 +71,7 @@ class FirstActivity : AppCompatActivity() {
 
 
         fun saveJson() {
+            //将json格式的字符串改写成arrylist类型的数据，首先要得到json格式的字符串
             val timelist = Gson().fromJson(getJsonString(), arrayListOf<Product>().javaClass)
             timelist.add(Product(timecheck()))
             //在重新转化为json格式字符串
@@ -85,12 +85,13 @@ class FirstActivity : AppCompatActivity() {
 
 
         fun initThread(){
-            Thread(Runnable {
+            Thread(Runnable {//通过对象表达式来创建一个线程，实际则为实现了ruunable 接口，或者理解为thread的ruunable匿名实例的run方法的重写
                 try{
                     var flag=true
                     while(flag){
-                        Thread.sleep(1000)
-                        runOnUiThread { text_view_1.text=timecheck()
+                        Thread.sleep(1000)//延迟
+                        runOnUiThread {//回到主线程，ui线程 ，，还可以用handle的方法
+                            text_view_1.text=timecheck()
                             button_4.setOnClickListener {
                                 flag=false
                             }
@@ -103,6 +104,7 @@ class FirstActivity : AppCompatActivity() {
         }
 
 
+        //点击事件监听器
         button_1.setOnClickListener {
             text_view_1.text = timecheck()
         }
@@ -110,7 +112,7 @@ class FirstActivity : AppCompatActivity() {
         button_2.setOnClickListener {
             val jsonFilePath=getExternalFilesDir(null)?.absolutePath+"time_data.json"
             //val file=File(jsonFilePath)
-            val fis=FileInputStream(jsonFilePath)
+            val fis=FileInputStream(jsonFilePath)//fileInPutStream是InputStream的子类
             if(fis.available()!=0) {
                 saveJson()
             }else{

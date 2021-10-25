@@ -14,7 +14,7 @@ import java.io.FileInputStream
 import java.io.IOException
 import java.nio.charset.Charset
 
-class MyAdapter(val time:ArrayList<Product>): RecyclerView.Adapter<MyViewHolder>(){
+class MyAdapter(var time:ArrayList<Product>): RecyclerView.Adapter<MyViewHolder>(){
 
 
 
@@ -30,7 +30,7 @@ class MyAdapter(val time:ArrayList<Product>): RecyclerView.Adapter<MyViewHolder>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val timelist=time[position]
-        holder.itemView.apply {
+        holder.time_text_view.apply {
             text_view_time.text=timelist.time
         }
         holder.btn.setOnClickListener{
@@ -49,13 +49,13 @@ class MyAdapter(val time:ArrayList<Product>): RecyclerView.Adapter<MyViewHolder>
         val itemView= LayoutInflater.from(parent.context).inflate(R.layout.item_time,parent,false)
         val itemViewHolder=MyViewHolder(itemView)
 
-        return MyViewHolder(itemView)
+        return itemViewHolder
     }
 }
 
 
 class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-    val time: TextView =itemView.findViewById(R.id.text_view_time)
+    val time_text_view: TextView =itemView.findViewById(R.id.text_view_time)
     val btn:Button=itemView.findViewById(R.id.button_delete)
 
 }

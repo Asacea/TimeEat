@@ -28,7 +28,26 @@ class RecordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
 
-            val jsonFile = getExternalFilesDir(null)?.absolutePath + "time_data.json"
+        fun getJsonString():String?{
+            val jsonFilePath=getExternalFilesDir(null)?.absolutePath+"time_data.json" //获取到json文件的地址val
+            var json:String?=null
+            val charset:Charset=Charsets.UTF_8
+            try{
+                val jsonFile=FileInputStream(jsonFilePath)
+                val size=jsonFile.available()
+                val buffer=ByteArray(size)
+                jsonFile.read(buffer)
+                jsonFile.close()//用完流要记得关闭
+                json=String(buffer,charset)
+            }catch(e:IOException){
+                e.printStackTrace()
+                return null
+            }
+            return json
+        }//得到json格式的字符串
+
+
+        val jsonFile = getExternalFilesDir(null)?.absolutePath + "time_data.json"
 
 
             val timeRecyclerView = findViewById<RecyclerView>(R.id.recyclerview_1)
@@ -36,8 +55,9 @@ class RecordActivity : AppCompatActivity() {
 
 
              val fis=FileInputStream(jsonFile)
-            //val timelist = Gson().fromJson(getJsonString(), listOf<Product>().javaClass)
-            val timelist = readJsonStream(fis)
+        //注意这里有较大改动
+            val timelist = Gson().fromJson(getJsonString(), arrayListOf<Product>().javaClass)
+           // val timelist = readJsonStream(fis)
             timeRecyclerView.adapter = MyAdapter(timelist)
 
 
